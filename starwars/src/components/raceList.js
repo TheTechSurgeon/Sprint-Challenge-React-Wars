@@ -3,8 +3,36 @@ import axios from "axios";
 import raceCard from "./raceCard"
 
 export default function raceList(){
-    const [swapiData, setSwapiData] = useState([]
+    const [swapiData, setSwapiData] = useState([])
         
         
-        useEffect
-}
+    useEffect(() =>{
+        axios
+            .get(
+                "https://swapi.co/api/species/"
+            )
+            .then(response => {
+                setSwapiData(response);
+                
+            })
+            .catch(error=>{
+                console.log(error)
+            });
+        },[])
+    
+        return(
+            <div className="character-info">
+            {swapiData.map(banana => {
+              return (
+                <raceCard
+                  key={banana.index}
+                  name={banana.name}
+                  gender={banana.gender}
+                />
+              );
+            })}
+             </div>
+          ) 
+    
+    }
+       
